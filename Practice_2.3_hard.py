@@ -30,16 +30,41 @@
 
 import random
 
-n = 13
+def check_room (current_room, current_iteration):
+    global current_floor
+    temp = current_room - n
+    cluster = current_iteration ** 2
+    if 0 <= temp <= cluster:
+        print(f'Current floor: {current_floor}')
+        print(f'Rooms: {r}')
+        print(f'Temp: {temp}')
+        print(f'Current iteration {current_iteration} is legitimate')
+        for i in range(current_iteration):
+            if temp >= current_iteration:
+                temp -= current_iteration
+                current_floor -= 1
+            else:
+                print(f'Current position at floor: {current_iteration - temp}')
+                print(f'We found floor: {current_floor}')
+                return True
+
+
+    else:
+        print('Next iteration')
+
+n = 12
 print(f'n = {n}')
-floors = []
 rooms = []
+current_room = 0
+current_floor = 0
 i = 1
-while i < 5:
-    for f in range(i):
-        floors.append(f + i)
-    print(f'Floors: {floors}')
+while True:
+
+    current_floor += i
     r = i ** 2
-    print(f'Rooms: {r}')
-    print(f'Rooms at floor: {i}')
-    i += 1
+    current_room += r
+    print(f'Current room: {current_room}')
+
+    if check_room(current_room, i):
+        break
+    i +=1
