@@ -8,7 +8,7 @@
 
 import random
 
-r_int = random.randint(100, 1000)
+r_int = random.randint(1, 10)
 print(f'Число: {r_int}')
 while r_int:
     print(r_int % 10)
