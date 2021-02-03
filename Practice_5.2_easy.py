@@ -3,7 +3,11 @@
 
 import os
 
+
+def show_listdir():
+    for dir in os.listdir(path=os.getcwd()):
+        if os.path.isdir(dir):
+            print(f'{dir}')
+
+
 print(os.listdir(path=os.getcwd()))
-for dir in os.listdir(path=os.getcwd()):
-    if os.path.isdir(dir):
-        print(f'{dir}')
