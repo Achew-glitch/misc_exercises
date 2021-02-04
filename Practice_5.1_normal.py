@@ -15,7 +15,6 @@
 # и импортированные в данный файл из easy.py
 
 from sys import exit
-from re import search
 import os
 import easy
 
@@ -23,30 +22,34 @@ menu = ['Перейти в папку', 'Просмотреть содержим
 while True:
     for i in enumerate(menu, 1):
         print(f'{i[0]}. {i[1]}')
+    cur_path = os.getcwd()
+    print(f'Текущее расположение: {cur_path}')
     print('----------------------')
     answer = input().lower()
     if answer == '1':
-        cur_path = os.getcwd()
-        answer = input('В какую папку перейти?\n')
+        cur_path = os.path.split(cur_path)
+        print(cur_path)
+        answer = input('В какую директорию перейти: ')
         new_path = os.path.join(os.getcwd(), answer)
-        if answer in os.listdir(os.getcwd()):
-            regex = '\.+' + answer
-            new_path = search(regex, cur_path).group()
-            print(new_path)
-        if os.path.exists(new_path):
+        if answer in os.path.split(cur_path[0]):
+            os.chdir(cur_path[0])
+            print(f'Выполнен переход в директорию {answer}\n{cur_path[0]}')
+        elif os.path.exists(new_path):
             os.chdir(new_path)
-            print(f'Выполнен переход в папку {answer}\n{new_path}')
+            print(f'Выполнен переход в директорию {answer}\n{new_path}')
         else:
-            print(f'Папка "{answer}" не существует в текущем каталоге')
+            print(f'Директория "{answer}" не существует в текущем каталоге')
         print('----------------------')
     elif answer == '2':
         print('Список папок в текущей директории:')
         easy.show_listdir()
         print('----------------------')
     elif answer == '3':
-        pass
+        answer = input('Укажите название директории, которую необходимо удалить: ')
+        easy.delete_dir_in_current_path(cur_path, answer)
     elif answer == '4':
-        pass
+        answer = input('Укажите название новой директории: ')
+        easy.make_dir_in_curr_path(cur_path, answer)
     elif answer == 'exit':
         exit()
     else:
