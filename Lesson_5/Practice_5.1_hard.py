@@ -19,6 +19,7 @@
 # python with_args.py param1 param2 param3
 import os
 import sys
+from shutil import copyfile
 
 print('sys.argv = ', sys.argv)
 
@@ -46,18 +47,54 @@ def ping():
 
 
 def copy_file():
-    pass
+    if not name:
+        print('Необходимо указать имя файла вторым параметром')
+        return
+    file_name = os.path.join(os.getcwd(), name)
+    print(os.getcwd())
+    try:
+        copyfile(file_name, os.path.join(os.getcwd(), f'copy_{name}'))
+        print(f'Файл {name} успешно скопирован')
+    except FileNotFoundError:
+        print(f'{name} - такой файл не существует')
 
 
 def remove_file():
-    pass
+    if not name:
+        print('Необходимо указать имя файла вторым параметром')
+        return
+    file_name = os.path.join(os.getcwd(), name)
+    try:
+        os.remove(file_name)
+        print(f'Файл {name} успешно удален')
+    except FileNotFoundError:
+        print(f'{name} - такой файл не существует')
 
 
 def change_dir():
-    pass
+    if not name:
+        print('Необходимо указать необходимый путь вторым параметром')
+        return
+    try:
+        relative_path = os.path.split(os.getcwd())
+        new_path = os.path.join(os.getcwd(), name)
+        if name.startswith('/') or name.startswith('C') or name.startswith('D'):
+            os.chdir(name)
+            print(f'Тукщая директория: {os.getcwd()}')
+        elif name in relative_path[0]:
+            os.chdir(relative_path[0])
+            print(f'Текущая директория {os.getcwd()}')
+        elif os.path.exists(new_path):
+            os.chdir(new_path)
+            print(f'Текущая директория: {os.getcwd()}')
+        else:
+            print(f'{name} - такой директории не существует в текущем каталоге')
+    except FileNotFoundError:
+        print(f'{name} - такой путь не существует')
+
 
 def full_path():
-    pass
+    print(os.getcwd())
 
 
 do = {
