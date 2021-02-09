@@ -8,11 +8,11 @@
 from random import randint
 import re
 
-with open('random_integers.txt', 'w', encoding='utf-8') as w:
+with open('../random_integers.txt', 'w', encoding='utf-8') as w:
     for r_int in range(1, 2501):
         w.write(str(randint(0,9)))
 result = []
-with open('random_integers.txt', encoding='utf-8') as r:
+with open('../random_integers.txt', encoding='utf-8') as r:
     read = r.readline()
     for i in range(0,10):
         regex = f'{i}+'

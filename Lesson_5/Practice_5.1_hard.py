@@ -19,6 +19,7 @@
 # python with_args.py param1 param2 param3
 import os
 import sys
+
 print('sys.argv = ', sys.argv)
 
 
@@ -29,36 +30,55 @@ def print_help():
 
 
 def make_dir():
-    if not dir_name:
+    if not name:
         print("Необходимо указать имя директории вторым параметром")
         return
-    dir_path = os.path.join(os.getcwd(), dir_name)
+    dir_path = os.path.join(os.getcwd(), name)
     try:
         os.mkdir(dir_path)
-        print('директория {} создана'.format(dir_name))
+        print('директория {} создана'.format(name))
     except FileExistsError:
-        print('директория {} уже существует'.format(dir_name))
+        print('директория {} уже существует'.format(name))
 
 
 def ping():
     print("pong")
 
+
+def copy_file():
+    pass
+
+
+def remove_file():
+    pass
+
+
+def change_dir():
+    pass
+
+def full_path():
+    pass
+
+
 do = {
     "help": print_help,
     "mkdir": make_dir,
-    "ping": ping
+    "ping": ping,
+    "cp": copy_file,
+    "rm": remove_file,
+    "cd": change_dir,
+    "ls": full_path
 }
 
 try:
-    dir_name = sys.argv[2]
+    name = sys.argv[2]
 except IndexError:
-    dir_name = None
+    name = None
 
 try:
     key = sys.argv[1]
 except IndexError:
     key = None
-
 
 if key:
     if do.get(key):
