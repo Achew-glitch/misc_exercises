@@ -107,11 +107,17 @@ class Student(People):
         self.gr = group
 
     def __str__(self):
-        return f'{self.name} {self.surname} из класса {self.gr.group}\n' \
+        return f'{self.name} {self.surname}\n' \
                f'Родители: {self.parents}'
 
-    def get_subjects(self):
-        return f'Список предметов: {self.gr.get_subjects()}'
+    def __eq__(self, other):
+        if self.name == other[0] and self.name == other[1]:
+            return True
+
+    def get_info(self):
+        print(f'{self.name} {self.surname} из класса {self.gr}\n' \
+              f'Список предметов: {self.gr.get_subjects()}')
+        self.gr.get_teachers()
 
 
 class Teacher(People, Group):
@@ -150,14 +156,18 @@ for gr in sc.groups:
 
 while True:
     print(sc)
-    a = input('Класс: ')
+    a = input('Класс: ')  # Указывать цифру и букву с соблюдением регистра
     if a == 'выход':
         break
-    elif a:
-        c_gr = sc.get_group()
+    elif sc.get_group(a):
+        c_gr = sc.get_group(a)
         c_gr.get_students()
-        a = input('Ученик: ')
+        a = input('Ученик: ')  # Указывать через пробел имя и фамилию
         if a == 'выход':
             break
         elif a:
-            pass
+            try:
+                i = c_gr.students.index(a.split())
+                c_gr.students[i].get_info()
+            except ValueError:
+                print(f'Ученика {a} нет в классе {c_gr}')
