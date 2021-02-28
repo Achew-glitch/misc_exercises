@@ -30,9 +30,9 @@ def normative_hours(file):
     return workers
 
 print(f'{"Имя":<10} {"Фамилия":<10} {"Отработано_часов":<5} {"Норматив":<5} {"Зарплата":<5}\n')
-for h_workers in hours_worked('../Lesson_4/hours_of'):
+for h_workers in hours_worked('hours_of'):
     rate = int(h_workers[2])
-    for compare in normative_hours('../Lesson_4/workers'):
+    for compare in normative_hours('workers'):
         if h_workers[0] and h_workers[1] in compare:
             money = int(compare[2])
             norm = int(compare[4])

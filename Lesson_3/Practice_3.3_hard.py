@@ -11,7 +11,7 @@
 # Чтобы получить список больших букв русского алфавита:
 # print(list(map(chr, range(ord('А'), ord('Я')+1))))
 
-with open('../Lesson_4/fruits.txt', encoding='utf-8') as r:
+with open('fruits.txt', encoding='utf-8') as r:
     for char in list(map(chr, range(ord('а'), ord('я')+1))):
         founding_fruits = ''
         for word in r:
