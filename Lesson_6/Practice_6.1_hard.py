@@ -52,7 +52,6 @@ class Worker:
             self.__worker.update(clock_rate_worker)
 
 
-h_w = []
 workers = []
 with open('workers', encoding='UTF-8') as f:
     next(f)
